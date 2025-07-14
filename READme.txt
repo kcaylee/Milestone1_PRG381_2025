@@ -1,7 +1,62 @@
-DB Creation Script Run pgAdmin 
+# 🩺 BC Student Wellness Management System – Milestone 1
 
+This is a Java-based web application developed for Belgium Campus as part of the PRG3781 module. The system allows students to register, log in, and access a dashboard using JSP, Servlets, and PostgreSQL.
+
+---
+
+## 📚 Technologies Used
+
+- Java (Servlets)
+- JSP (JavaServer Pages)
+- HTML5 + Bootstrap 5
+- PostgreSQL
+- NetBeans IDE
+- Apache Tomcat
+
+---
+
+## 📁 Project Structure
+
+| File/Folder         | Description                                      |
+|---------------------|--------------------------------------------------|
+| `index.jsp`         | Home page with links to login and register       |
+| `register.jsp`      | Registration form with validation and feedback   |
+| `login.jsp`         | Login form with error handling                   |
+| `dashboard.jsp`     | Welcome page after login, shows student info     |
+| `Register.java`     | Servlet handling new user registration           |
+| `Login.java`        | Servlet handling user authentication             |
+
+---
+
+## ✅ Features
+
+### 🔐 Registration
+- Validates all fields (student number, email, phone)
+- Prevents duplicate email/student numbers
+- Feedback messages on success or error
+- Stores data in PostgreSQL
+
+### 🔓 Login
+- Authenticates against the database
+- Clear error messages on failure
+- Redirects to dashboard on success
+- Uses `HttpSession` for state
+
+### 🧾 Dashboard
+- Displays personalized welcome (student name + number)
+- Logout button:
+  - Invalidates session
+  - Redirects to `index.jsp`
+  - Shows logout confirmation popup
+
+---
+
+## 🧪 Database Setup (PostgreSQL)
+
+```sql
 CREATE DATABASE wellness_db;
 
+\c wellness_db
 
 CREATE TABLE users (
     student_number VARCHAR(20) PRIMARY KEY,
