@@ -1,28 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%
+    String studentName = (String) session.getAttribute("studentName");
+    
+    if(studentName == null){
+    response.sendRedirect("login.jsp");
+    return;
+    }
+    %>
 <html>
 <head>
-    <title>Login</title>
+    <title>Dashboard</title>
 </head>
 <body>
-    <h2>Student Login</h2>
-
-    <form action="LoginServlet" method="post">
-        <label>Email:</label><br>
-        <input type="email" name="email" required><br><br>
-
-        <label>Password:</label><br>
-        <input type="password" name="password" required><br><br>
-
-        <input type="submit" value="Login">
-    </form>
-
-    <%
-        String error = request.getParameter("error");
-        if ("true".equals(error)) {
-    %>
-        <p style="color:red;">Invalid email or password. Please try again.</p>
-    <%
-        }
-    %>
+    
+    <h1>Welcome, <%= studentName %>!</h1>
+    
+    <form action= "Logout" method="post"> <button type="submit">
+            Logout</button>
+    </form>  
 </body>
 </html>
