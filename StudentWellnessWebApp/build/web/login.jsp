@@ -1,50 +1,68 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
-<%@ page import="javax.servlet.http.HttpSession" %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Student Login</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <h2>Login to Wellness System</h2>
+<body class="bg-light">
 
-    <form action="Login" method="post">
-        <label>Email:</label><br>
-        <input type="email" name="email" required><br><br>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h3 class="card-title text-center text-primary mb-4">Login to Wellness System</h3>
 
-        <label>Password:</label><br>
-        <input type="password" name="password" required><br><br>
+                    <form action="Login" method="post">
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" name="email" required>
+                        </div>
 
-        <input type="submit" value="Login">
-    </form>
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-control" name="password" required>
+                        </div>
 
-    <br>
+                        <div class="d-grid mb-3">
+                            <button type="submit" class="btn btn-primary">Login</button>
+                        </div>
+                    </form>
 
-    <%
-     
-        HttpSession sessionLogin = request.getSession(false);
-        String status = (sessionLogin != null) ? (String) sessionLogin.getAttribute("loginStatus") : null;
-        if (status != null) {
-    %>
-        <textarea readonly rows="2" cols="50" style="color: green;"><%= status %></textarea>
-    <%
-            sessionLogin.removeAttribute("loginStatus"); // clear after displaying
-        }
+                    <div class="d-grid mb-2">
+                        <a href="index.jsp" class="btn btn-outline-secondary">Back to Home</a>
+                    </div>
 
-       
-        String error = request.getParameter("error");
-        if ("true".equals(error)) {
-            String code = request.getParameter("code");
-            String message = "Invalid email or password.";
-            if ("db".equals(code)) {
-                String dbMessage = request.getParameter("msg");
-                message = (dbMessage != null) ? dbMessage : "A database error occurred.";
-            }
-    %>
-        <textarea readonly rows="4" cols="50" style="color: red;"><%= message %></textarea>
-    <%
-        }
-    %>
+                    <!-- Display error messages if login fails -->
+                    <%
+                        String error = request.getParameter("error");
+                        String message = null;
+
+                        if ("true".equals(error)) {
+                            String code = request.getParameter("code");
+                            message = "Invalid email or password.";
+
+                            if ("db".equals(code)) {
+                                String dbMessage = request.getParameter("msg");
+                                message = (dbMessage != null) ? dbMessage : "A database error occurred.";
+                            }
+                    %>
+                        <div class="alert alert-danger mt-3" role="alert">
+                            <%= message %>
+                        </div>
+                    <%
+                        }
+                    %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS (optional) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

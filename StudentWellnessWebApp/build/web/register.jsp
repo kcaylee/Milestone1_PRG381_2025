@@ -1,47 +1,92 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <h2>Register for Wellness System</h2>
+<body class="bg-light">
 
-    <form action="Register" method="post">
-        <label>Student Number:</label><br>
-        <input type="text" name="student_number" required><br><br>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h3 class="card-title text-center text-primary mb-4">Register for Wellness System</h3>
 
-        <label>Name:</label><br>
-        <input type="text" name="name" required><br><br>
+                    <form action="Register" method="post">
+                        <div class="mb-3">
+                            <label class="form-label">Student Number</label>
+                            <input type="text" class="form-control" name="student_number" required
+                                   pattern="^[0-9]{6}$"
+                                   title="Student number must be exactly 6 digits.">
+                        </div>
 
-        <label>Surname:</label><br>
-        <input type="text" name="surname" required><br><br>
+                        <div class="mb-3">
+                            <label class="form-label">Name</label>
+                            <input type="text" class="form-control" name="name" required>
+                        </div>
 
-        <label>Email:</label><br>
-        <input type="email" name="email" required><br><br>
+                        <div class="mb-3">
+                            <label class="form-label">Surname</label>
+                            <input type="text" class="form-control" name="surname" required>
+                        </div>
 
-        <label>Phone:</label><br>
-        <input type="text" name="phone" required><br><br>
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" name="email" required>
+                        </div>
 
-        <label>Password:</label><br>
-        <input type="password" name="password" required><br><br>
+                        <div class="mb-3">
+                            <label class="form-label">Phone</label>
+                            <input type="text" class="form-control" name="phone" required
+                                   pattern="^0[0-9]{9}$"
+                                   title="Phone number must start with 0 and be 10 digits long.">
+                        </div>
 
-        <input type="submit" value="Register">
-    </form>
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-control" name="password" required>
+                        </div>
 
-    <%
-        String message = request.getParameter("msg");
-        String error = request.getParameter("error");
-        if (message != null) {
-    %>
-        <p style="color:green;"><%= message %></p>
-    <%
-        } else if (error != null) {
-    %>
-        <p style="color:red;"><%= error %></p>
-    <%
-        }
-    %>
+                        <div class="d-grid mb-2">
+                            <button type="submit" class="btn btn-success">Register</button>
+                        </div>
+                    </form>
+
+                    <!-- Back to home button -->
+                    <div class="d-grid mb-3">
+                        <a href="index.jsp" class="btn btn-outline-secondary">Back to Home</a>
+                    </div>
+
+                    <!-- Display success or error messages -->
+                    <%
+                        String message = request.getParameter("msg");
+                        String error = request.getParameter("error");
+
+                        if (message != null) {
+                    %>
+                        <div class="alert alert-success" role="alert">
+                            <%= message %>
+                        </div>
+                    <%
+                        } else if (error != null) {
+                    %>
+                        <div class="alert alert-danger" role="alert">
+                            <%= error %>
+                        </div>
+                    <%
+                        }
+                    %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS (optional) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

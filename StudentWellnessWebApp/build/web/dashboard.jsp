@@ -1,28 +1,57 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"%>
-<html>
+<%@ page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    // Handle logout request
+    if ("logout".equals(request.getParameter("action"))) {
+        session.invalidate();
+        response.sendRedirect("index.jsp?logout=1");
+        return;
+    }
+
+    String studentName = (session != null) ? (String) session.getAttribute("studentName") : null;
+    String studentNumber = (session != null) ? (String) session.getAttribute("studentNumber") : null;
+
+    if (studentName == null || studentNumber == null) {
+        response.sendRedirect("login.jsp");
+        return;
+    }
+%>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Login</title>
+    <meta charset="UTF-8">
+    <title>Student Dashboard</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <h2>Student Login</h2>
+<body class="bg-light">
 
-    <form action="LoginServlet" method="post">
-        <label>Email:</label><br>
-        <input type="email" name="email" required><br><br>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h2 class="card-title text-center text-primary">
+                        Welcome, <%= studentName %>!
+                    </h2>
+                    <h5 class="text-center text-secondary">
+                        Student Number: <%= studentNumber %>
+                    </h5>
+                    <p class="card-text mt-4 text-center">
+                        This is your wellness dashboard. From here, you will be able to manage appointments, give feedback, and view counsellors in the future.
+                    </p>
 
-        <label>Password:</label><br>
-        <input type="password" name="password" required><br><br>
+                    <!-- Logout button -->
+                    <form method="get" action="dashboard.jsp" class="d-flex justify-content-center mt-4">
+                        <input type="hidden" name="action" value="logout">
+                        <button type="submit" class="btn btn-danger">Logout</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-        <input type="submit" value="Login">
-    </form>
-
-    <%
-        String error = request.getParameter("error");
-        if ("true".equals(error)) {
-    %>
-        <p style="color:red;">Invalid email or password. Please try again.</p>
-    <%
-        }
-    %>
+<!-- Bootstrap JS (optional) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
