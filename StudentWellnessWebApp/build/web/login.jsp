@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Student Login</title>
-    <!-- Bootstrap 5 CSS -->
+    <!-- Bootstrap 5 CSS for styling -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-light">
@@ -16,6 +16,7 @@
                 <div class="card-body">
                     <h3 class="card-title text-center text-primary mb-4">Login to Wellness System</h3>
 
+                    <!-- Login form -->
                     <form action="Login" method="post">
                         <div class="mb-3">
                             <label class="form-label">Email</label>
@@ -32,11 +33,12 @@
                         </div>
                     </form>
 
+                    <!-- Link to return to home page -->
                     <div class="d-grid mb-2">
                         <a href="index.jsp" class="btn btn-outline-secondary">Back to Home</a>
                     </div>
 
-                    <!-- Display error messages if login fails -->
+                    <!-- Display error messages passed via URL parameters -->
                     <%
                         String error = request.getParameter("error");
                         String message = null;
@@ -45,6 +47,7 @@
                             String code = request.getParameter("code");
                             message = "Invalid email or password.";
 
+                            // If the error was caused by a database exception, show detailed message
                             if ("db".equals(code)) {
                                 String dbMessage = request.getParameter("msg");
                                 message = (dbMessage != null) ? dbMessage : "A database error occurred.";
@@ -62,7 +65,7 @@
     </div>
 </div>
 
-<!-- Bootstrap JS (optional) -->
+<!-- Optional Bootstrap JS bundle -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

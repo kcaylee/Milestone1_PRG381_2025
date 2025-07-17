@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
-    <!-- Bootstrap 5 CSS -->
+    <!-- Bootstrap 5 CSS for styling -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-light">
@@ -16,7 +16,9 @@
                 <div class="card-body">
                     <h3 class="card-title text-center text-primary mb-4">Register for Wellness System</h3>
 
+                    <!-- Registration form -->
                     <form action="Register" method="post">
+                        <!-- Validates student number: must be exactly 6 digits -->
                         <div class="mb-3">
                             <label class="form-label">Student Number</label>
                             <input type="text" class="form-control" name="student_number" required
@@ -39,6 +41,7 @@
                             <input type="email" class="form-control" name="email" required>
                         </div>
 
+                        <!-- Validates phone: must start with 0 and be 10 digits -->
                         <div class="mb-3">
                             <label class="form-label">Phone</label>
                             <input type="text" class="form-control" name="phone" required
@@ -56,12 +59,12 @@
                         </div>
                     </form>
 
-                    <!-- Back to home button -->
+                    <!-- Navigation button back to home -->
                     <div class="d-grid mb-3">
                         <a href="index.jsp" class="btn btn-outline-secondary">Back to Home</a>
                     </div>
 
-                    <!-- Display success or error messages -->
+                    <!-- Display success or error messages based on registration result -->
                     <%
                         String message = request.getParameter("msg");
                         String error = request.getParameter("error");
@@ -86,7 +89,7 @@
     </div>
 </div>
 
-<!-- Bootstrap JS (optional) -->
+<!-- Optional Bootstrap JS bundle -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
